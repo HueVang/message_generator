@@ -1,5 +1,5 @@
 {
-  "name": "Message Template Generator",
+  "name": "message_template_generator",
   "version": "1.0.0",
   "description": "Message Template Generator",
   "main": "server.js",
