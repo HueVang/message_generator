@@ -1,0 +1,16 @@
+h1 {
+  color: red;
+  text-align: center;
+}
+
+input {
+  min-width: 75%;
+}
+
+.red {
+  color: red;
+}
+
+.invisible {
+  display: none;
+}

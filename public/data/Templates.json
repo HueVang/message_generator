@@ -1,0 +1,26 @@
+[
+  {
+    "style" : "shortAndSweet",
+    "beginning": "welcomes you! Room",
+    "end": "is now ready for you. We hope that you enjoy your stay and please let us know if you need anything!"
+  },
+  {
+    "style" : "welcoming",
+    "beginning": ", we are so excited to have you at",
+    "middle": "!We hope you enjoy room",
+    "end": ". And please feel free to contact us at anytime!"
+  },
+  {
+    "style" : "includeDates",
+    "beginning": "and welcome to",
+    "oneFourth" : "! It looks like we have you in room",
+    "middle": "from",
+    "threeFourths" : "to",
+    "end": ". We hope you enjoy your stay!"
+  },
+  {
+    "style" : "shortAndSweet",
+    "beginning": "is the place to be! Room",
+    "end": "is now ready for you. Have fun and enjoy your stay!"
+  }
+]

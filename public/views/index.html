@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Message Template</title>
+    <link rel="stylesheet" href="/styles/stylesheet.css">
+    <script type='module' src="/scripts/main.js"></script>
+  </head>
+  <body>
+    <main>
+        <h1 id="header">Message Template Generator</h1>
+        <select id="selectMessageTemplate">
+          <option value="placeholder">Choose a message template</option>
+        </select>
+        <select id="selectCompany">
+          <option value="placeholder">Choose a company</option>
+        </select>
+        <select id="selectGuest">
+          <option value="placeholder">Choose a guest</option>
+        </select>
+        <p id="message">Your message will appear here.</p>
+        <div id="customTemplateInterface" class="invisible">
+          <input id="customInput" type="text"/>
+          <button id="confirmButton">Confirm Message</button>
+          <div>
+            <select id="companyVariablesForCustomTemplate">
+              <option>Company Variables</option>
+            </select>
+            <select id="guestVariablesForCustomTemplate">
+              <option>Guest Variables</option>
+            </select>
+          </div>
+        </div>
+    </main>
+  </body>
+</html>
