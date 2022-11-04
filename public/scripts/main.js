@@ -254,13 +254,11 @@ document.getElementById('selectMessageTemplate').onchange = function() {
 
 
 document.getElementById('guestVariablesForCustomTemplate').onchange = function() {
-  document.getElementById('guestVariablesForCustomTemplate').value;
   appendVariableToCustomInput('guest');
 };
 
 
 document.getElementById('companyVariablesForCustomTemplate').onchange = function() {
-  document.getElementById('companyVariablesForCustomTemplate').value;
   appendVariableToCustomInput('company');
 };
 
