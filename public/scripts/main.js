@@ -86,7 +86,7 @@ function convertTimestampsToReadableDate() {
 };
 
 
-function getTimeNow() {
+function getTimeOfDay() {
   let hours = new Date().getHours();
   if (hours < 12) {
     greeting = 'Good morning';
@@ -96,7 +96,7 @@ function getTimeNow() {
     greeting = 'Good evening';
   };
 };
-getTimeNow();
+getTimeOfDay();
 
 
 function captureGuestInfo(guest) {
@@ -143,7 +143,7 @@ function checkCompanyAndGuestSelections() {
 
 
 function populateTemplate(index) {
-  getTimeNow();
+  getTimeOfDay();
   checkCompanyAndGuestSelections();
   let template = messageTemplateList[index];
   if (index == 'Custom') {
