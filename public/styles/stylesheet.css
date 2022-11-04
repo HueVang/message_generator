@@ -1,16 +1,25 @@
 h1 {
-  color: red;
+  color: blue;
   text-align: center;
+  font-family: Arial, Verdana;
 }
 
 input {
   min-width: 75%;
 }
 
-.red {
-  color: red;
+p {
+  text-align: center;
 }
 
 .invisible {
   display: none;
+}
+
+#main-content {
+  text-align: center;
+}
+
+#selectMessageTemplate {
+  max-width: 50%;
 }

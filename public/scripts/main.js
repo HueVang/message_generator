@@ -1,26 +1,18 @@
-// Import data from JSON files
 import guestInfoList from '../data/Guests.json' assert {type: 'json'};
 import companyInfoList from '../data/Companies.json' assert {type: 'json'};
 import messageTemplateList from '../data/Templates.json' assert {type: 'json'};
 
 
-$(function() {
-  populateDropdownSelections();
-});
-
-// Global scope variables section
-let date;
 let greeting;
-let adjustedDateForTimezone;
 let guestJsonRawData;
+let templateIndex;
+let messageOutput;
 let guestSelected = false;
 let companySelected = false;
 let templateSelected = false;
 let customInput = false;
-let templateIndex;
-let messageOutput;
 
-//Objects section
+
 const currentGuest = {
   firstName: null,
   lastName: null,
@@ -29,11 +21,17 @@ const currentGuest = {
   endTimestamp: null
 };
 
+
 const currentCompany = {
   companyName: null,
   timezone: null,
   city: null
 };
+
+
+$(function() {
+  populateDropdownSelections();
+});
 
 
 function populateDropdownSelections() {
@@ -45,7 +43,7 @@ function populateDropdownSelections() {
 
 function getJsonData(array) {
   array.forEach(function(obj) {
-    var index = array.indexOf(obj)
+    let index = array.indexOf(obj)
     if (array == guestInfoList) {
       $('#selectGuest').append(`<option value="${index}"> ${obj.firstName} ${obj.lastName} </option>`);
     } else if (array == companyInfoList) {
@@ -60,25 +58,26 @@ function getJsonData(array) {
 };
 
 
-// Date and time functions
+// new Date(0) sets the date to the beginning of epoch time which is Jan 1, 1970 00:00:00 GMT.
 function epochToLocalDate(epochTime) {
-  var utcSeconds = epochTime;
-  date = new Date(0);
+  let utcSeconds = epochTime;
+  let date = new Date(0);
   date.setUTCSeconds(utcSeconds);
   return date;
 };
 
 
 function timezoneOffset(date, timezone) {
-  adjustedDateForTimezone = date.toLocaleString("en-US", {timeZone: timezone});
+  let adjustedDateForTimezone = date.toLocaleString("en-US", {timeZone: timezone});
   return adjustedDateForTimezone;
 };
 
 
 function convertDate(date, timezone) {
-  var convertedDate = timezoneOffset(epochToLocalDate(date), timezone);
+  let convertedDate = timezoneOffset(epochToLocalDate(date), timezone);
   return convertedDate;
 };
+
 
 // The guestJsonRawData.reservation timestamps are used in the date/time calculations to avoid any "invalid data" results.
 function convertTimestampsToReadableDate() {
@@ -86,8 +85,9 @@ function convertTimestampsToReadableDate() {
   currentGuest.endTimestamp = convertDate(guestJsonRawData.reservation.endTimestamp, currentCompany.timezone);
 };
 
+
 function getTimeNow() {
-  var hours = new Date().getHours();
+  let hours = new Date().getHours();
   if (hours < 12) {
     greeting = 'Good morning';
   } else if (12 <= hours && hours < 17) {
@@ -97,13 +97,6 @@ function getTimeNow() {
   };
 };
 getTimeNow();
-
-
-function clearAllObjectValues(obj) {
-  Object.keys(obj).forEach(function(key) {
-    obj[key] = null;
-  });
-};
 
 
 function captureGuestInfo(guest) {
@@ -124,6 +117,13 @@ function captureCompanyInfo(company) {
   currentCompany.companyName = company.company;
   currentCompany.timezone = company.timezone;
   currentCompany.city = company.city;
+};
+
+
+function clearAllObjectValues(obj) {
+  Object.keys(obj).forEach(function(key) {
+    obj[key] = null;
+  });
 };
 
 
@@ -160,7 +160,7 @@ function populateTemplate(index) {
       case 'welcoming':
         messageOutput = `${greeting}${template.beginning} ${currentCompany.companyName  || '{companyName}'}${template.middle} ${currentGuest.roomNumber || '{roomNumber}'}${template.end}`;
         break;
-    }
+    };
     createMessage();
   };
 };
@@ -207,15 +207,6 @@ function hideCustomInput() {
 };
 
 
-function appendVariableToCustomInput(companyOrGuest) {
-  let variable = document.getElementById(companyOrGuest + 'VariablesForCustomTemplate').value;
-  if (variable != '---') {
-    document.getElementById('customInput').value += variable;
-    document.getElementById("customInput").focus();
-  };
-};
-
-// JavaScript DOM events section
 document.getElementById('selectGuest').onchange = function() {
   let guestIndex = document.getElementById('selectGuest').value;
   if (guestIndex != 'placeholder') {
@@ -271,6 +262,19 @@ document.getElementById('guestVariablesForCustomTemplate').onchange = function()
 document.getElementById('companyVariablesForCustomTemplate').onchange = function() {
   document.getElementById('companyVariablesForCustomTemplate').value;
   appendVariableToCustomInput('company');
+};
+
+
+function appendVariableToCustomInput(companyOrGuest) {
+  let variable = document.getElementById(companyOrGuest + 'VariablesForCustomTemplate').value;
+  let currentLength = document.getElementById('customInput').value.length;
+  let totalStringLength = currentLength + variable.length;
+  if (variable != '---' && totalStringLength <= 400) {
+    document.getElementById('customInput').value += variable;
+    document.getElementById("customInput").focus();
+  } else if (variable != '---' && totalStringLength > 400) {
+    alert('Message is longer than 400 characters. Please try again.');
+  };
 };
 
 
